@@ -9,6 +9,11 @@
 =====
 
 @desc: 用牛顿法来求解函数的极值
+       1. 牛顿法是一种函数逼近法。
+       2. 基本思想是，在极小点附近用二阶 Taylor 多项式近似替代目标函数 f(x)，从而求出f(x)的极小点的估计值。
+       3. 实质上，牛顿法作为一种优化方法，就是将一个函数极值点的问题转化为求另一个函数的（目标函数的导数）的根的问题。
+       4. 牛顿法 的收敛速度相当快，但是它也要求计算函数在一系列迭代点上的一阶导数和二阶导数的值。这往往是非常不方便的。
+       5. 最重要的，牛顿法的初始点的选取 x1 尤为重要，要求 x1 充分靠近 x*，否则点列 {xk} 可能就不收敛于极小点。
 """
 
 from sympy.abc import x
@@ -97,12 +102,17 @@ def test_newton_figure():
 
 """
 newton 法求解函数极值
+fun_: 目标函数
+s：默认起始点
+max_iter: 默认的最大迭代的次数
+theta: 迭代终止条件（也可选取其它条件作为终止条件）
 """
-def newton_tangent(fun, s = 1, max_iter = 100, prt_step = False, theta = 0.01):
+def newton_tangent(fun_, s = 1, max_iter = 100, prt_step = False, theta = 0.01):
+    fun = fun_.diff()
     for i in range(max_iter):
         s = s - fun.subs(x,s)/fun.diff().subs(x,s)
         if prt_step:
-            print("After {0} iteration, the solution is updated to {1}".format(i+1,s))
+            print("fter {0} iteration, the solution is updated to {1}".format(i+1,s))
         if abs(float(fun.subs(x, s))) <= theta:
             return s
 
@@ -117,6 +127,15 @@ def test_newton_1():
 """
 对new_ton 法求解函数极值的方法进行测试
 """
+def test_newton_3():
+    f = -x*x*x + 100 * (x - 1)*(x - 1) - 10*x + 1
+    _x = newton_tangent(f, s=2, max_iter=4, prt_step=True)
+    print(float(_x), float(f.subs(x, _x)))
+    # 1.0670769047379751 -10.435868379983964
+
+"""
+对new_ton 法求解函数极值的方法进行测试
+"""
 def test_newton_2():
     f = integrate(atan(x), (x, 0, x))
     _x = newton_tangent(f.diff(), s=1, max_iter=4, prt_step=True, theta = 0.01)
@@ -124,4 +143,5 @@ def test_newton_2():
 
 
 if __name__ == '__main__':
-    test_newton_1()
+    # test_newton_1()
+    test_newton_3()
