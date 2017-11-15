@@ -61,7 +61,7 @@ def linear_equation_solution():
 抛物线逼近法
 """
 def parabolic_approximation(f, x1, x2, x3, max_iter = 100, theta = 0.01):
-    print("===============begin=================\nparam: x1={0} x1={1} x1={2}".format(x1, x2, x3))
+    print("===============parabolic approximation begin=================\nparam: x1={0} x1={1} x1={2}".format(x1, x2, x3))
     i = 0
     while (i == 0) or (i < max_iter and abs(x_star - x2) > theta):
         from scipy.linalg import solve
@@ -83,7 +83,7 @@ def parabolic_approximation(f, x1, x2, x3, max_iter = 100, theta = 0.01):
                 x3 = x_star
         i += 1
         print("process#{0}: x1={0} x1={1} x1={2}".format(i, x1, x2, x3))
-    print("===============end=================\nx1={0} x1={1} x1={2}".format(x1, x2, x3))
+    print("===============parabolic approximation  end=================\nx1={0} x1={1} x1={2}".format(x1, x2, x3))
     return x2, f(x2)
 
 

@@ -12,6 +12,8 @@
        需要注意的是：
             1. 在实现牛顿法时，使用了 sympy 库，本文件中的所有函数的入参 f，都表示是一个 expr，不是一个 lambda 对象
             2. 可以使用 f.subs(x, x.val) 来将 x 的值 x.val 代入到表达式 f 中进行计算
+            3. 关于 sympy: http://docs.sympy.org/latest/index.html
+                           http://reverland.github.io/python/2012/08/30/sympy-tutorial/#矩阵
 """
 from sympy.abc import x
 from sympy import *
@@ -33,7 +35,7 @@ h0: 初始步长
 times: 步长加倍数
 """
 def extrapolation_interpolation_method(f, x1 = 0, h0 = 1, times = 2, max_iter = 100):
-    print("===============begin=================\nparam: x1={0} h0={1} times={2}".format(x1, h0, times))
+    print("===============extrapolation interpolation begin=================\nparam: x1={0} h0={1} times={2}".format(x1, h0, times))
     i = 0
     x_arr = list(range(5))
     x_arr[1] = x1
@@ -57,7 +59,7 @@ def extrapolation_interpolation_method(f, x1 = 0, h0 = 1, times = 2, max_iter = 
             t = x_arr[3]
             x_arr[3] = x_arr[4]
             x_arr[4] = t
-            print("===============end====================\nparam: x1={0} x2{1} x3={2} x4={3} h{4}={5} times={6}"
+            print("===============extrapolation interpolation end====================\nparam: x1={0} x2{1} x3={2} x4={3} h{4}={5} times={6}"
                   .format(x_arr[1], x_arr[2], x_arr[3], x_arr[4], i, h0, h0))
             x_min_index = get_min(f, x_arr, get_min(f, x_arr, get_min(f, x_arr, 1, 2), 3), 4)
             print("result: a={0} b={1}\n".format(x_arr[x_min_index - 1], x_arr[x_min_index + 1]))
@@ -80,7 +82,7 @@ def extrapolation_interpolation_method(f, x1 = 0, h0 = 1, times = 2, max_iter = 
             t = x_arr[3]
             x_arr[3] = x_arr[4]
             x_arr[4] = t
-            print("===============end====================\nparam: x1={0} x2={1} x3={2} x4={3} h{4}={5} times={6}"
+            print("===============extrapolation interpolation end====================\nparam: x1={0} x2={1} x3={2} x4={3} h{4}={5} times={6}"
                   .format(x_arr[1], x_arr[2], x_arr[3], x_arr[4], i, h0, h0))
             x_min_index = get_min(f, x_arr, get_min(f, x_arr, get_min(f, x_arr, 1, 2), 3), 4)
             print("result: a={0} b={1}\n".format(x_arr[x_min_index - 1], x_arr[x_min_index + 1]))
@@ -95,12 +97,14 @@ max_iter: 默认的最大迭代的次数
 theta: 迭代终止条件（也可选取其它条件作为终止条件）
 """
 def newton_tangent(fun_, s = 1, max_iter = 100, prt_step = False, theta = 0.01):
+    print("=====================newton begin========================")
     fun = fun_.diff()
     for i in range(max_iter):
         s = s - fun.subs(x,s)/fun.diff().subs(x,s)
         if prt_step:
             print("after {0} iteration, the solution is updated to {1}".format(i+1,s))
         if abs(float(fun.subs(x, s))) <= theta:
+            print("=====================newton end========================")
             return s
 
 """

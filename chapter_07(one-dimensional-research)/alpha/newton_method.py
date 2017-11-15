@@ -108,12 +108,14 @@ max_iter: 默认的最大迭代的次数
 theta: 迭代终止条件（也可选取其它条件作为终止条件）
 """
 def newton_tangent(fun_, s = 1, max_iter = 100, prt_step = False, theta = 0.01):
+    print("=====================newton begin========================")
     fun = fun_.diff()
     for i in range(max_iter):
         s = s - fun.subs(x,s)/fun.diff().subs(x,s)
         if prt_step:
             print("fter {0} iteration, the solution is updated to {1}".format(i+1,s))
         if abs(float(fun.subs(x, s))) <= theta:
+            print("=====================newton end========================")
             return s
 
 """

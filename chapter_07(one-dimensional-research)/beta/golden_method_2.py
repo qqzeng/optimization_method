@@ -119,7 +119,7 @@ def golden_section(f, a_, b_):
     y1 = f(x1)
     y2 = f(x2)
     i = 0; j = 0
-    print("===============begin=================\nparam: a={0} b={1}".format(a, b))
+    print("===============golden section begin=================\nparam: a={0} b={1}".format(a, b))
     while (b - a) / (b_ - a_) >= theta:
         while y1 < y2 and (b - a) / (b_ - a_) >= theta:
             a = x2
@@ -137,7 +137,7 @@ def golden_section(f, a_, b_):
             y2 = f(x2)
             j += 1
             print("a: ", a, "b: ", b)
-    print("================================\nresult: left={0} right={1}\n".format(j, i))
+    print("===============golden section end=================\nresult: left={0} right={1}\n".format(j, i))
     print(a, b, (a + b) / 2, f((a + b) / 2))
     return a, b,(a + b) / 2,  f((a + b) / 2)
 

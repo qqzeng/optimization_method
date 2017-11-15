@@ -33,7 +33,7 @@ h0: 初始步长
 times: 步长加倍数
 """
 def extrapolation_interpolation_method(f, x1 = 0, h0 = 1, times = 2, max_iter = 100):
-    print("===============begin=================\nparam: x1={0} h0={1} times={2}".format(x1, h0, times))
+    print("===============extrapolation interpolation begin=================\nparam: x1={0} h0={1} times={2}".format(x1, h0, times))
     i = 0
     x = list(range(5))
     x[1] = x1
@@ -57,7 +57,7 @@ def extrapolation_interpolation_method(f, x1 = 0, h0 = 1, times = 2, max_iter = 
             t = x[3]
             x[3] = x[4]
             x[4] = t
-            print("===============end====================\nparam: x1={0} x2{1} x3={2} x4={3} h{4}={5} times={6}"
+            print("===============extrapolation interpolation end====================\nparam: x1={0} x2{1} x3={2} x4={3} h{4}={5} times={6}"
                   .format(x[1], x[2], x[3], x[4], i, h0, h0))
             x_min_index = get_min(f, x, get_min(f, x, get_min(f, x, 1, 2), 3), 4)
             print("result: a={0} b={1} c={2}\n".format(x[x_min_index - 1], x[x_min_index], x[x_min_index + 1]))
@@ -80,7 +80,7 @@ def extrapolation_interpolation_method(f, x1 = 0, h0 = 1, times = 2, max_iter = 
             t = x[3]
             x[3] = x[4]
             x[4] = t
-            print("===============end====================\nparam: x1={0} x2={1} x3={2} x4={3} h{4}={5} times={6}"
+            print("===============extrapolation interpolation end====================\nparam: x1={0} x2={1} x3={2} x4={3} h{4}={5} times={6}"
                   .format(x[1], x[2], x[3], x[4], i, h0, h0))
             x_min_index = get_min(f, x, get_min(f, x, get_min(f, x, 1, 2), 3), 4)
             print("result: a={0} b={1} c={2}\n".format(x[x_min_index - 1], x[x_min_index], x[x_min_index + 1]))
@@ -90,7 +90,7 @@ def extrapolation_interpolation_method(f, x1 = 0, h0 = 1, times = 2, max_iter = 
 抛物线逼近法
 """
 def parabolic_approximation(f, x1, x2, x3, max_iter = 100, theta = 0.01):
-    print("===============begin=================\nparam: x1={0} x1={1} x1={2}".format(x1, x2, x3))
+    print("===============parabolic approximation begin=================\nparam: x1={0} x1={1} x1={2}".format(x1, x2, x3))
     i = 0
     while (i == 0) or (i < max_iter and abs(x_star - x2) > theta):
         from scipy.linalg import solve
@@ -112,7 +112,7 @@ def parabolic_approximation(f, x1, x2, x3, max_iter = 100, theta = 0.01):
                 x3 = x_star
         i += 1
         print("process#{0}: x1={0} x1={1} x1={2}".format(i, x1, x2, x3))
-    print("===============end=================\nx1={0} x1={1} x1={2}".format(x1, x2, x3))
+    print("===============parabolic approximation end=================\nx1={0} x1={1} x1={2}".format(x1, x2, x3))
     return x2, f(x2)
 
 

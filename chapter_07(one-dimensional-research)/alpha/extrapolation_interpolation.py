@@ -49,7 +49,7 @@ h0: 初始步长
 times: 步长加倍数
 """
 def extrapolation_interpolation_method(f, x1 = 0, h0 = 1, times = 2, max_iter = 100):
-    print("===============begain=================\nparam: x1={0} h0={1} times={2}".format(x1, h0, times))
+    print("===============extrapolation interpolation begin=================\nparam: x1={0} h0={1} times={2}".format(x1, h0, times))
     i = 0
     x = list(range(5))
     x[1] = x1
@@ -73,7 +73,7 @@ def extrapolation_interpolation_method(f, x1 = 0, h0 = 1, times = 2, max_iter = 
             t = x[3]
             x[3] = x[4]
             x[4] = t
-            print("===============end====================\nparam: x1={0} x2{1} x3={2} x4={3} h{4}={5} times={6}"
+            print("===============extrapolation interpolation end====================\nparam: x1={0} x2{1} x3={2} x4={3} h{4}={5} times={6}"
                   .format(x[1], x[2], x[3], x[4], i, h0, h0))
             x_min_index = get_min(f, x, get_min(f, x, get_min(f, x, 1, 2), 3), 4)
             print("result: a={0} b={1}\n".format(x[x_min_index - 1], x[x_min_index + 1]))
@@ -96,7 +96,7 @@ def extrapolation_interpolation_method(f, x1 = 0, h0 = 1, times = 2, max_iter = 
             t = x[3]
             x[3] = x[4]
             x[4] = t
-            print("===============end====================\nparam: x1={0} x2={1} x3={2} x4={3} h{4}={5} times={6}"
+            print("===============extrapolation interpolation end====================\nparam: x1={0} x2={1} x3={2} x4={3} h{4}={5} times={6}"
                   .format(x[1], x[2], x[3], x[4], i, h0, h0))
             x_min_index = get_min(get_min(get_min(f, x, 1, 2), 3), 4)
             print("result: a={0} b={1}\n".format(x[x_min_index - 1], x[x_min_index + 1]))
